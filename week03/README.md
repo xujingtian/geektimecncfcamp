@@ -52,9 +52,22 @@ EXPOSE 8080
 ENTRYPOINT ["/httpserver"]
 ```
 
+3、编译
+
+```shell
+docker build . -t httpserver:0.1 -f Dockerfile .
+```
+
 目前报错，在跟老师请教中
 
-## 3、运行
+```shell
+Step 7/9 : COPY --from=builder /builder/httpserver /
+COPY failed: stat builder/httpserver: file does not exis
+```
+
+
+
+## 4、运行
 
 ```shell
 docker run -d httpserver:0.0.1
