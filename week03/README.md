@@ -29,7 +29,9 @@ builder  Dockerfile  myhttpserver.go
 
 ## 3、编写Dockerfile 
 
-记录了2个版本，实际使用  scratch版本
+记录了2个版本（busybox、scratch），实际使用  scratch版本,隐含要求， 多阶段构建
+
+第一个From编译，第二个打包，中间会产生dangling images,可删除
 
 ```dockerfile
 FROM golang:1.17 AS builder
@@ -66,7 +68,12 @@ EXPOSE 8360
 ENV ENV local
 WORKDIR /httpserver/
 ENTRYPOINT ["./httpserver"]
+//CMD ["./httpserver""]
 ```
+
+注意使用CMD 启动，有可能会造成僵尸进程
+
+
 
 
 
@@ -152,3 +159,29 @@ CONTAINER ID   IMAGE            COMMAND         CREATED          STATUS         
 ## 7、进入容器
 
 通过 nsenter 进入容器查看 IP 配置
+
+先查看docker信息
+
+```
+root@deanUbuntu:~/week03homework# docker ps
+CONTAINER ID   IMAGE            COMMAND         CREATED          STATUS          PORTS      NAMES
+59624f80abb6   httpserver:0.1   "/httpserver"   14 seconds ago   Up 14 seconds   8080/tcp   stupefied_noether
+```
+
+根据docker NAMES获取PID
+
+```
+root@deanUbuntu:~/week03homework# PID=$(docker inspect --format "{{ .State.Pid }}" stupefied_noether)
+root@deanUbuntu:~/week03homework# echo $PID
+61987
+root@deanUbuntu:~/week03homework# nsenter -t 61987 -n ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+19: eth0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+```
+
