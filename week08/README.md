@@ -26,7 +26,7 @@ e265835b28ac: Layer already exists
 0.0.1: digest: sha256:b761ce057ae1cefacd34ed4e864f3a19d2d6b8f21b546434d4939b178f4e6a81 size: 740
 ```
 
-为避免在生产集群上运行时出现网络问题，推送至阿里云新加坡备用
+为避免在生产集群上运行时出现网络问题，推送至备机备用
 
 ```shell
 *****@***-mbp geektime-cloud-native-2 % docker tag sha256:c581a47a05942620656ae470213b7a0cabc6ebd445840afcce42f693d97671b9 registry.ap-southeast-1.aliyuncs.com/geekcncfcamp/http-server:0.0.1
