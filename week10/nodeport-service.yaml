@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: httpserver
+  namespace: default
+spec:
+  ports:
+    - name: cce-service-0
+      protocol: TCP
+      port: 32000
+      targetPort: 32000
+      nodePort: 31181
+  selector:
+    app: httpserver
+    version: v1
+  clusterIP: 10.247.22.179
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+status:
+  loadBalancer: {}

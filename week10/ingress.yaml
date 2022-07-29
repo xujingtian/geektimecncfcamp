@@ -1,0 +1,21 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: httpserver-ingress
+  namespace: default
+  selfLink: /apis/extensions/v1beta1/namespaces/default/ingresses/httpserver-ingress
+
+spec:
+  rules:
+    - host: test.httpserver.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: httpserver
+              servicePort: 32000
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.168.1.2
+        hostname: test.httpserver.local
