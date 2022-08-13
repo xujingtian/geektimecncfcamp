@@ -1,7 +1,7 @@
 # 手动创建证书
 ```shell
-openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=haylin Inc./CN=*.haylin.test' -keyout haylin.test.key -out haylin.test.crt
-kubectl create -n istio-system secret tls haylin-credential --key=haylin.test.key --cert=haylin.test.crt
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=haylin Inc./CN=*.*.test' -keyout *.*.key -out *.*.crt
+kubectl create -n istio-system secret tls haylin-credential --key=*.test.key --cert=*.test.crt
 ```
 
 # 创建namespace,给namespace加上label
@@ -115,4 +115,6 @@ kubectl apply -f istio-vs-https.yaml
 ```shell
 istioctl dashboard jaeger --address 0.0.0.0
 ```
-截图见screenshots文件夹
+![jaeger_search](README.assets/jaeger_search.png)
+
+![jaeger_detail-2](README.assets/jaeger_detail-2.png)
