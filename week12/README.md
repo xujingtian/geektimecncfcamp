@@ -35,7 +35,7 @@ kubectl apply -f istio-vs-http.yaml
 > Accept: */*
 >
 < HTTP/1.1 200 OK
-< date: Sun, 10 Jul 2022 14:51:55 GMT
+< date: Sun, 10 Aug 2022 14:51:55 GMT
 < content-length: 3
 < content-type: text/plain; charset=utf-8
 < x-envoy-upstream-service-time: 153
@@ -78,8 +78,8 @@ kubectl apply -f istio-vs-https.yaml
 * ALPN, server accepted to use h2
 * Server certificate:
 *  subject: O=haylin Inc.; CN=*.haylin.test
-*  start date: Jul 10 14:26:59 2022 GMT
-*  expire date: Jul 10 14:26:59 2023 GMT
+*  start date: Aug 10 14:26:59 2022 GMT
+*  expire date: Aug 10 14:26:59 2023 GMT
 *  issuer: O=haylin Inc.; CN=*.haylin.test
 *  SSL certificate verify result: self signed certificate (18), continuing anyway.
 * Using HTTP2, server supports multi-use
@@ -104,7 +104,7 @@ kubectl apply -f istio-vs-https.yaml
 < HTTP/2 503
 < content-length: 19
 < content-type: text/plain
-< date: Sun, 10 Jul 2022 15:20:14 GMT
+< date: Sun, 10 Aug 2022 15:20:14 GMT
 < server: istio-envoy
 <
 * Connection #0 to host httpsserver.haylin.test left intact
